@@ -1,0 +1,71 @@
+<div ng-controller="divisionController">
+    <!-- Introduction Row -->
+    <div class="row">
+        <div class="col-lg-12">
+            <input type="text" id="searchBar" placeholder="&#xF002;" ng-model="searchTerm.name">
+            <h1 class="page-header">Divisions
+                <small></small>
+            </h1>
+            <p>The divisions around the world</p>
+        </div>
+    </div>
+
+    <!-- Team Members Row -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="page-header"></h2>
+            <div class="addButton">
+                <button class="btn btn-success" ng-click="division.adding=true;" ng-hide="division.adding">Toevoegen</button>
+                <button type="button" class="btn btn-success" ng-click="saveNewDivision(division)" ng-show="division.adding">Save</button>
+                <button type="button" class="btn btn-danger" ng-click="division.adding=false;" ng-show="division.adding">Cancel</button>
+            </div>
+        </div>
+
+        <div class="col-lg-12 addingRow" ng-show="division.adding">
+            Division:  <input type="text" id="divisionName" ng-model="newDivision.name" required/> 
+            Sub name:       <input type="text" id="divisionPlace" ng-model="newDivision.small"/> 
+            Beschrijving:   <input type="text" id="divisionExplanation" ng-model="newDivision.subname"/> 
+            Image:          <input type="text" id="divisionImage" ng-model="newDivision.image"/> 
+            Federation:     <select ng-model="newDivision.federation"> 
+                                <option ng-repeat="federation in federations" value="{{federation.id}}">{{federation.name}}</option>
+                            </select>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-4 col-sm-6 text-center" ng-repeat="division in divisions | filter: searchTerm">
+                <button class="btn btn-warning updateButton" ng-click="division.updating=true;" ng-hide="division.adding">Change</button>
+                <button class="btn btn-danger deleteButton" ng-hide="division.updating" ng-click="deleteDivision(division)"><i class="fa fa-times" aria-hidden="true"></i></button>
+                <button class="btn btn-success deleteButton" ng-show="division.updating" ng-click="updateDivision(division)"><i class="fa fa-check" aria-hidden="true"></i></button>
+
+                <div ng-hide="division.updating">
+                    <a href="#!/{{division.url}}"><img class="img-circle img-responsive img-center" ng-src="../images/divisions/{{division.image}}" alt=""></a>
+                    <h3>{{division.name}}{{division.small | commaFilter}}
+                        <small>{{division.small}}</small>
+                        <br>
+                        <small><b>{{getFederationName(division.federation)}}</b></small>
+                    </h3>
+                    <p>{{division.subname}}</b></p>
+                </div>
+                <form class="updateForm" ng-show="division.updating">
+                    <div class="inputRow">
+                        Division:       <input type="text" class="inputType" id="divisionName" ng-model="division.name" required/><br />
+                    </div>
+                    <div class="inputRow">
+                        Sub name:       <input type="text" class="inputType" id="divisionPlace" ng-model="division.small"/><br />
+                    </div>
+                    <div class="inputRow">
+                        Beschrijving:   <input type="text" class="inputType" id="divisionExplanation" ng-model="division.subname"/><br />
+                    </div>
+                    <div class="inputRow">
+                        Image:          <input type="text" class="inputType" id="divisionImage" ng-model="division.image"/><br />
+                    </div>
+                    <div class="inputRow">
+                        Federation:     <select class="inputType" ng-model="division.federation"> 
+                                            <option ng-repeat="federation in federations" value="{{federation.id}}">{{federation.name}}</option>
+                                        </select>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

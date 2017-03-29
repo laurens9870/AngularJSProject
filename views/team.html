@@ -1,0 +1,72 @@
+<div ng-controller="teamController">
+    <!-- Introduction Row -->
+    <div class="row">
+        <div class="col-lg-12">
+            <input type="text" id="searchBar" placeholder="&#xF002;" ng-model="searchTerm.name">
+            <h1 class="page-header">Teams
+                <small></small>
+            </h1>
+            <p>The teams around the world</p>
+        </div>
+    </div>
+
+    <!-- Team Members Row -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="page-header"></h2>
+            <div class="addButton">
+                <button class="btn btn-success" ng-click="team.adding=true;" ng-hide="team.adding">Toevoegen</button>
+                
+                <button type="button" class="btn btn-success" ng-click="saveNewTeam(team)" ng-show="team.adding">Save</button>
+                <button type="button" class="btn btn-danger" ng-click="team.adding=false;" ng-show="team.adding">Cancel</button>
+            </div>
+        </div>
+
+        <div class="col-lg-12 addingRow" ng-show="team.adding">
+            Club naam:      <input type="text" id="teamName" ng-model="newTeam.name" required/> 
+            Stad:           <input type="text" id="teamPlace" ng-model="newTeam.small" required/> 
+            Beschrijving:   <input type="text" id="teamExplanation" ng-model="newTeam.subname"/> 
+            Image:          <input type="text" id="teamImage" ng-model="newTeam.image"/> 
+            Division:       <select ng-model="newTeam.division"> 
+                                <option ng-repeat="division in divisions" value="{{division.id}}">{{division.name}}</option>
+                            </select>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-4 col-sm-6 text-center" ng-repeat="team in teams | filter: searchTerm">
+                <button class="btn btn-warning updateButton" ng-click="team.updating=true;" ng-hide="team.adding">Change</button>
+                <button class="btn btn-danger deleteButton" ng-hide="team.updating" ng-click="deleteTeam(team)"><i class="fa fa-times" aria-hidden="true"></i></button>
+                <button class="btn btn-success deleteButton" ng-show="team.updating" ng-click="updateTeam(team)"><i class="fa fa-check" aria-hidden="true"></i></button>
+
+                <div ng-hide="team.updating">
+                    <a href="#!/{{team.url}}"><img class="img-circle img-responsive img-center" ng-src="../images/teams/{{team.image}}" alt=""></a>
+                    <h3>{{team.name}}{{team.small | commaFilter}}
+                        <small>{{team.small}}</small>
+                        <br>
+                        <small><b>{{getDivisionName(team.division)}}</b></small>
+                    </h3>
+                    <p>{{team.subname}}</p>
+                </div>
+                <form class="updateForm" ng-show="team.updating">
+                    <div class="inputRow">
+                        Club naam:      <input type="text" class="inputType" id="teamName" ng-model="team.name" required/><br />
+                    </div>
+                    <div class="inputRow">
+                        Stad:           <input type="text" class="inputType" id="teamPlace" ng-model="team.small" required/><br />
+                    </div>
+                    <div class="inputRow">
+                        Beschrijving:   <input type="text" class="inputType" id="teamExplanation" ng-model="team.subname"/><br />
+                    </div>
+                    <div class="inputRow">
+                        Image:          <input type="text" class="inputType" id="teamImage" ng-model="team.image"/><br />
+                    </div>
+                    <div class="inputRow">
+                        Division:     <select class="inputType" ng-model="team.division"> 
+                                            <option ng-repeat="division in divisions" value="{{division.id}}">{{division.name}}</option>
+                                        </select>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

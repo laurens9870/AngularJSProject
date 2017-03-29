@@ -1,0 +1,68 @@
+/*!
+ * Start Bootstrap - Round About (http://startbootstrap.com/)
+ * Copyright 2013-2016 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
+ */
+
+body {
+    padding-top: 70px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+}
+
+#searchBar{
+    font-family:Arial, FontAwesome;
+    float: right;
+    margin-top: 50px;
+}
+
+.addButton{
+    float: right;
+    margin-top: -60px;
+}
+
+.deleteButton{
+    float: right;
+    margin-right:25px;
+}
+
+.updateButton{
+    float: left;
+    margin-left: 25px;
+}
+
+.addingRow{
+    margin-bottom: 15px;
+    margin-left: 10px;
+}
+
+.updateForm{
+    margin-top: 60px;
+}
+
+.inputRow{
+    margin-bottom: 10px;
+}
+
+.inputType{
+    float:right;
+}
+
+.img-center {
+	margin: 0 auto;
+}
+
+.img-responsive {
+    width: 200px !important;
+    height: 200px !important;
+}
+
+.addingRow input.ng-invalid.ng-touched, .updateForm input.ng-invalid.ng-touched {
+    background-color: #FA787E;
+  }
+
+.addingRow input.ng-valid.ng-touched, .updateForm input.ng-valid.ng-touched {
+    background-color: #78FA89;
+}
+
+footer {
+    margin: 50px 0;
+}

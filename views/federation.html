@@ -1,0 +1,71 @@
+<div ng-controller="federationController">
+    <!-- Introduction Row -->
+    <div class="row">
+        <div class="col-lg-12">
+            <input type="text" id="searchBar" placeholder="&#xF002;" ng-model="searchTerm">
+            <h1 class="page-header">Football Federation
+                <small></small>
+            </h1>
+            <p>The Football Federations around the world.</p>
+        </div>
+    </div>
+
+    <!-- Team Members Row -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="page-header"></h2>
+            <div class="addButton">
+                <button class="btn btn-success" ng-click="federation.adding=true;" ng-hide="federation.adding">Toevoegen</button>
+                <button type="button" class="btn btn-success" ng-click="saveNewFederation(federation)" ng-show="federation.adding">Save</button>
+                <button type="button" class="btn btn-danger" ng-click="federation.adding=false;" ng-show="federation.adding">Cancel</button>
+            </div>
+        </div>
+
+        <div class="col-lg-12 addingRow" ng-show="federation.adding">
+            Federation:     <input type="text" id="federationName" ng-model="newFederation.name" required/>
+            Land:           <input type="text" id="federationPlace" ng-model="newFederation.small" required/>
+            Beschrijving:   <input type="text" id="federationExplanation" ng-model="newFederation.subname"/>
+            Image:          <input type="text" id="federationImage" ng-model="newFederation.image"/>
+            Association:    <select ng-model="newFederation.association" required>
+                                <option ng-repeat="association in associations" value="{{association.id}}">{{association.name}}</option>
+                            </select>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-4 col-sm-6 text-center" ng-repeat="federation in federations | filter: searchTerm">
+                <button class="btn btn-warning updateButton" ng-click="federation.updating=true;" ng-hide="federation.adding">Change</button>
+                <button class="btn btn-danger deleteButton" ng-hide="federation.updating" ng-click="deleteFederation(federation)"><i class="fa fa-times" aria-hidden="true"></i></button>
+                <button class="btn btn-success deleteButton" ng-show="federation.updating" ng-click="updateFederation(federation)"><i class="fa fa-check" aria-hidden="true"></i></button>
+
+                <div ng-hide="federation.updating">
+                    <a href="#!/{{federation.url}}"><img class="img-circle img-responsive img-center" ng-src="../images/federations/{{federation.image}}" alt=""></a>
+                    <h3>{{federation.name}}{{federation.small | commaFilter}}
+                        <small>{{federation.small}}</small>
+                        <br>
+                        <small><b>{{getAssociationName(federation.association)}}</b></small>
+                    </h3>
+                    <p>{{federation.subname}}</p>
+                </div>
+                <form class="updateForm" ng-show="federation.updating">
+                    <div class="inputRow">
+                        Federation:       <input type="text" class="inputType" id="federationName" ng-model="federation.name" required/><br />
+                    </div>
+                    <div class="inputRow">
+                        Land:       <input type="text" class="inputType" id="federationPlace" ng-model="federation.small" required/><br />
+                    </div>
+                    <div class="inputRow">
+                        Beschrijving:   <input type="text" class="inputType" id="federationExplanation" ng-model="federation.subname"/><br />
+                    </div>
+                    <div class="inputRow">
+                        Image:          <input type="text" class="inputType" id="federationImage" ng-model="federation.image"/><br />
+                    </div>
+                    <div class="inputRow">
+                        Association:     <select class="inputType" ng-model="federation.association" required> 
+                                            <option ng-repeat="association in associations" value="{{association.id}}">{{association.name}}</option>
+                                        </select>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

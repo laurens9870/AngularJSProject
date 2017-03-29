@@ -1,0 +1,28 @@
+<div ng-controller="homeController">
+    <!-- Introduction Row -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">FIFA
+                <small></small>
+            </h1>
+            <p>The Fédération Internationale de Football Association (FIFA) is the international governing body of association football, futsal, and beach soccer. FIFA is responsible for the organisation of football's major international tournaments, notably the World Cup which commenced in 1930 and the Women's World Cup which commenced in 1991.</p>
+        </div>
+    </div>
+
+    <!-- Team Members Row -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="page-header">Football Associations</h2>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-4 col-sm-6 text-center" ng-repeat="association in associations">
+                <a href="#!/{{association.url}}"><img class="img-circle img-responsive img-center" ng-src="../images/assocations/{{association.image}}" alt=""></a>
+                <h3>{{association.name}}{{association.small | commaFilter}}
+                    <small>{{association.small}}</small>
+                </h3>
+                <p>{{association.subname}}</p>
+            </div>
+        </div>
+    </div>
+</div>

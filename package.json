@@ -1,0 +1,20 @@
+{
+  "name": "angular-project",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "karma start test/karma.conf.js",
+    "postinstall": "bower install",
+    "prestart": "npm install",
+    "start": "http-server ."
+  },
+  "author": "Laurens Burger",
+  "license": "ISC",
+  "dependencies": {
+    "angular-route": "^1.6.3"
+  }
+}
